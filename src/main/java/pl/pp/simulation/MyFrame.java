@@ -48,9 +48,9 @@ public class MyFrame extends JFrame {
 
         timeLabel = new JLabel("Czas: 0");
 
-        JPanel grassPanel = getParameterPanel("Trawa", "10");
-        JPanel harePanel = getParameterPanel("Zające", "5");
-        JPanel foxPanel = getParameterPanel("Lisy", "2");
+        grassParameter = new ParameterModel("Trawa", 10);
+        hareParameter = new ParameterModel("Zające", 5);
+        foxParameter = new ParameterModel("Lisy", 2);
 
         initStartButton();
         initStopButton();
@@ -59,9 +59,9 @@ public class MyFrame extends JFrame {
         JButton chartButton = new JButton("Wykres");
 
         controlPanel.add(timeLabel);
-        controlPanel.add(grassPanel);
-        controlPanel.add(harePanel);
-        controlPanel.add(foxPanel);
+        controlPanel.add(grassParameter.getPanel());
+        controlPanel.add(hareParameter.getPanel());
+        controlPanel.add(foxParameter.getPanel());
         controlPanel.add(startButton);
         controlPanel.add(stopButton);
         controlPanel.add(resetButton);
@@ -76,6 +76,10 @@ public class MyFrame extends JFrame {
             started = false;
 
             timer.stop();
+
+            grassParameter.setEditable(true);
+            hareParameter.setEditable(true);
+            foxParameter.setEditable(true);
 
             steps = 0;
             timeLabel.setText("Czas: 0");
@@ -103,18 +107,12 @@ public class MyFrame extends JFrame {
             stopButton.setEnabled(true);
             startButton.setEnabled(false);
 
+            grassParameter.setEditable(false);
+            hareParameter.setEditable(false);
+            foxParameter.setEditable(false);
+
             timer.start();
         });
-    }
-
-    private JPanel getParameterPanel(String label, String defaultValue) {
-        JPanel grassPanel = new JPanel();
-        grassPanel.setLayout(new GridLayout(1, 2, 2, 2));
-        JLabel grassLabel = new JLabel(label);
-        JTextField grassTextField = new JTextField(defaultValue);
-        grassPanel.add(grassLabel);
-        grassPanel.add(grassTextField);
-        return grassPanel;
     }
 
     public static void main(String[] args) {
