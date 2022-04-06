@@ -13,5 +13,7 @@ public class Components {
 
     public static JLabel timeLabel;
 
+    public static JTextArea textArea;
+
     public static MyComponent myComponent = new MyComponent();
 }

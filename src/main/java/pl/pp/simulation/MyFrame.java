@@ -17,16 +17,7 @@ public class MyFrame extends JFrame {
         JPanel controlPanel = getControlPanel();
         JScrollPane scrollPane = getScrollPane();
 
-        timer = new Timer(40, e -> {
-            steps++;
-            timeLabel.setText("Czas: " + steps);
-
-            for (Hare hare :hareList) {
-                hare.move();
-            }
-
-            myComponent.repaint();
-        });
+        timer = new Step();
 
 
         add(myComponent);
@@ -36,7 +27,7 @@ public class MyFrame extends JFrame {
     }
 
     private JScrollPane getScrollPane() {
-        JTextArea textArea = new JTextArea();
+        textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(ProgramData.frameWidth, ProgramData.frameHeight - ProgramData.maxHeight -50));

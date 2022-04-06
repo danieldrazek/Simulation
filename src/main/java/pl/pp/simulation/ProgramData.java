@@ -18,6 +18,7 @@ public class ProgramData {
     public static long steps = 0;
 
     public static List<Hare> hareList = new LinkedList<>();
+    public static List<Hare> newHareList = new LinkedList<>();
     public static List<Grass> grassList = new LinkedList<>();
 
 }

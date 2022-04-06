@@ -8,6 +8,7 @@ public class ParameterModel {
     private int defaultValue;
     private JPanel panel;
     private JTextField textField;
+    private JLabel label;
 
     public ParameterModel(String stringLabel, int defaultValue) {
         this.stringLabel = stringLabel;
@@ -18,9 +19,9 @@ public class ParameterModel {
     private void initPanel() {
         panel = new JPanel();
         panel.setLayout(new GridLayout(1, 2, 2, 2));
-        JLabel grassLabel = new JLabel(stringLabel);
+        label = new JLabel(stringLabel);
         textField = new JTextField(Integer.toString(defaultValue));
-        panel.add(grassLabel);
+        panel.add(label);
         panel.add(textField);
     }
 
@@ -30,6 +31,10 @@ public class ParameterModel {
 
     public JPanel getPanel() {
         return panel;
+    }
+
+    public void setValue(int value) {
+        label.setText(stringLabel + " " + value);
     }
 
     public int getValue() {
