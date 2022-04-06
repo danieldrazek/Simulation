@@ -3,6 +3,9 @@ package pl.pp.simulation;
 import javax.swing.*;
 import java.awt.*;
 
+import static pl.pp.simulation.Components.*;
+import static pl.pp.simulation.ProgramData.*;
+
 public class MyFrame extends JFrame {
 
     public MyFrame() {
@@ -14,8 +17,16 @@ public class MyFrame extends JFrame {
         JPanel controlPanel = getControlPanel();
         JScrollPane scrollPane = getScrollPane();
 
+        timer = new Timer(40, e -> {
+            steps++;
+            timeLabel.setText("Czas: " + steps);
 
-        add(new MyComponent());
+
+            myComponent.repaint();
+        });
+
+
+        add(myComponent);
         add(controlPanel, BorderLayout.EAST);
         add(scrollPane, BorderLayout.SOUTH);
 
@@ -35,15 +46,16 @@ public class MyFrame extends JFrame {
 
         controlPanel.setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth, ProgramData.frameHeight));
 
-        JLabel timeLabel = new JLabel("Czas: ");
+        timeLabel = new JLabel("Czas: 0");
 
         JPanel grassPanel = getParameterPanel("Trawa", "10");
         JPanel harePanel = getParameterPanel("Zające", "5");
         JPanel foxPanel = getParameterPanel("Lisy", "2");
 
-        JButton startButton = new JButton("Start");
-        JButton stopButton = new JButton("Stop");
-        JButton resetButton = new JButton("Reset");
+        initStartButton();
+        initStopButton();
+        initResetButton();
+
         JButton chartButton = new JButton("Wykres");
 
         controlPanel.add(timeLabel);
@@ -55,6 +67,44 @@ public class MyFrame extends JFrame {
         controlPanel.add(resetButton);
         controlPanel.add(chartButton);
         return controlPanel;
+    }
+
+    private void initResetButton() {
+        resetButton = new JButton("Reset");
+        resetButton.addActionListener(e -> {
+            running = false;
+            started = false;
+
+            timer.stop();
+
+            steps = 0;
+            timeLabel.setText("Czas: 0");
+
+        });
+    }
+
+    private void initStopButton() {
+        stopButton = new JButton("Stop");
+        stopButton.setEnabled(false);
+        stopButton.addActionListener(e -> {
+            running = false;
+            stopButton.setEnabled(false);
+            startButton.setEnabled(true);
+            timer.stop();
+        });
+    }
+
+    private void initStartButton() {
+        startButton = new JButton("Start");
+        startButton.addActionListener(e -> {
+            running = true;
+            started = true;
+
+            stopButton.setEnabled(true);
+            startButton.setEnabled(false);
+
+            timer.start();
+        });
     }
 
     private JPanel getParameterPanel(String label, String defaultValue) {

@@ -18,7 +18,5 @@ public class MyComponent extends JComponent {
         Rectangle limit = new Rectangle(0, 0, ProgramData.maxWidth, ProgramData.maxHeight);
         graphics2D.setPaint(Color.LIGHT_GRAY);
         graphics2D.fill(limit);
-
-
     }
 }
