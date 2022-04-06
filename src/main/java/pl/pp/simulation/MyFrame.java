@@ -77,6 +77,12 @@ public class MyFrame extends JFrame {
 
             timer.stop();
 
+            grassList.clear();
+            hareList.clear();
+
+            stopButton.setEnabled(false);
+            startButton.setEnabled(true);
+
             grassParameter.setEditable(true);
             hareParameter.setEditable(true);
             foxParameter.setEditable(true);
@@ -101,6 +107,16 @@ public class MyFrame extends JFrame {
     private void initStartButton() {
         startButton = new JButton("Start");
         startButton.addActionListener(e -> {
+
+            if (!started) {
+                for (int i = 0; i < hareParameter.getValue(); i++) {
+                    hareList.add(new Hare());
+                }
+
+                for (int i = 0; i < grassParameter.getValue(); i++) {
+                    grassList.add(new Grass());
+                }
+            }
             running = true;
             started = true;
 

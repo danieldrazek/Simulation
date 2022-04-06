@@ -31,4 +31,8 @@ public class ParameterModel {
     public JPanel getPanel() {
         return panel;
     }
+
+    public int getValue() {
+        return Integer.parseInt(textField.getText());
+    }
 }
