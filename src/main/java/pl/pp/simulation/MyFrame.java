@@ -21,6 +21,9 @@ public class MyFrame extends JFrame {
             steps++;
             timeLabel.setText("Czas: " + steps);
 
+            for (Hare hare :hareList) {
+                hare.move();
+            }
 
             myComponent.repaint();
         });
@@ -36,7 +39,7 @@ public class MyFrame extends JFrame {
         JTextArea textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setPreferredSize(new Dimension(ProgramData.frameWidth, ProgramData.frameHeight - ProgramData.maxHeight));
+        scrollPane.setPreferredSize(new Dimension(ProgramData.frameWidth, ProgramData.frameHeight - ProgramData.maxHeight -50));
         return scrollPane;
     }
 
@@ -44,7 +47,7 @@ public class MyFrame extends JFrame {
         JPanel controlPanel = new JPanel();
         controlPanel.setLayout(new GridLayout(8, 1, 50, 50));
 
-        controlPanel.setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth, ProgramData.frameHeight));
+        controlPanel.setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));
 
         timeLabel = new JLabel("Czas: 0");
 
@@ -109,11 +112,11 @@ public class MyFrame extends JFrame {
         startButton.addActionListener(e -> {
 
             if (!started) {
-                for (int i = 0; i < hareParameter.getValue(); i++) {
+                for (int i = 0; i< hareParameter.getValue(); i++) {
                     hareList.add(new Hare());
                 }
 
-                for (int i = 0; i < grassParameter.getValue(); i++) {
+                for (int i = 0; i< grassParameter.getValue(); i++) {
                     grassList.add(new Grass());
                 }
             }
