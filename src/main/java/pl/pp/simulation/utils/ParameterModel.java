@@ -1,4 +1,4 @@
-package pl.pp.simulation;
+package pl.pp.simulation.utils;
 
 import javax.swing.*;
 import java.awt.*;

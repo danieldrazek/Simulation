@@ -1,10 +1,14 @@
 package pl.pp.simulation;
 
+import pl.pp.simulation.model.Grass;
+import pl.pp.simulation.model.Hare;
+import pl.pp.simulation.utils.ProgramData;
+
 import javax.swing.*;
 import java.awt.*;
 
-import static pl.pp.simulation.ProgramData.grassList;
-import static pl.pp.simulation.ProgramData.hareList;
+import static pl.pp.simulation.utils.ProgramData.grassList;
+import static pl.pp.simulation.utils.ProgramData.hareList;
 
 public class MyComponent extends JComponent {
 
@@ -17,6 +21,7 @@ public class MyComponent extends JComponent {
     protected void paintComponent(Graphics g) {
         Toolkit.getDefaultToolkit().sync();
         Graphics2D graphics2D = (Graphics2D) g;
+
 
 
         Rectangle limit = new Rectangle(0, 0, ProgramData.maxWidth, ProgramData.maxHeight);

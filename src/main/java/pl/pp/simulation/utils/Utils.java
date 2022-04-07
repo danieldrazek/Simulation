@@ -1,8 +1,9 @@
-package pl.pp.simulation;
+package pl.pp.simulation.utils;
 
-import static pl.pp.simulation.Components.*;
-import static pl.pp.simulation.ProgramData.hareList;
-import static pl.pp.simulation.ProgramData.newHareList;
+import pl.pp.simulation.model.Hare;
+
+import static pl.pp.simulation.utils.Components.*;
+import static pl.pp.simulation.utils.ProgramData.newHareList;
 
 public class Utils {
     public static double getDistance(Hare hare1, Hare hare2) {

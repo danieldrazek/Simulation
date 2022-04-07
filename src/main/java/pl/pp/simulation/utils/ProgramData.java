@@ -1,4 +1,7 @@
-package pl.pp.simulation;
+package pl.pp.simulation.utils;
+
+import pl.pp.simulation.model.Grass;
+import pl.pp.simulation.model.Hare;
 
 import javax.swing.*;
 import java.util.LinkedList;

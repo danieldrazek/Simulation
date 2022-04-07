@@ -1,4 +1,7 @@
-package pl.pp.simulation;
+package pl.pp.simulation.utils;
+
+import pl.pp.simulation.MyComponent;
+import pl.pp.simulation.SimulationChart;
 
 import javax.swing.*;
 
@@ -16,4 +19,6 @@ public class Components {
     public static JTextArea textArea;
 
     public static MyComponent myComponent = new MyComponent();
+
+    public static SimulationChart simulationChart = new SimulationChart();
 }

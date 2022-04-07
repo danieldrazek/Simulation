@@ -1,4 +1,6 @@
-package pl.pp.simulation;
+package pl.pp.simulation.model;
+
+import pl.pp.simulation.utils.ProgramData;
 
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
