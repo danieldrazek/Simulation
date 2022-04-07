@@ -1,5 +1,6 @@
 package pl.pp.simulation;
 
+import pl.pp.simulation.model.Fox;
 import pl.pp.simulation.model.Grass;
 import pl.pp.simulation.model.Hare;
 import pl.pp.simulation.utils.ParameterModel;
@@ -35,7 +36,7 @@ public class MyFrame extends JFrame {
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setPreferredSize(new Dimension(ProgramData.frameWidth, ProgramData.frameHeight - ProgramData.maxHeight -50));
+        scrollPane.setPreferredSize(new Dimension(ProgramData.frameWidth, ProgramData.frameHeight - ProgramData.maxHeight - 50));
         return scrollPane;
     }
 
@@ -47,9 +48,9 @@ public class MyFrame extends JFrame {
 
         timeLabel = new JLabel("Czas: 0");
 
-        grassParameter = new ParameterModel("Trawa", 10);
-        hareParameter = new ParameterModel("Zające", 5);
-        foxParameter = new ParameterModel("Lisy", 2);
+        grassParameter = new ParameterModel("Trawa", 50);
+        hareParameter = new ParameterModel("Zające", 20);
+        foxParameter = new ParameterModel("Lisy", 12);
 
         initStartButton();
         initStopButton();
@@ -82,11 +83,13 @@ public class MyFrame extends JFrame {
 
             simulationChart.getGrassSeries().clear();
             simulationChart.getHareSeries().clear();
+            simulationChart.getFoxSeries().clear();
 
             timer.stop();
 
             grassList.clear();
             hareList.clear();
+            foxList.clear();
 
             stopButton.setEnabled(false);
             startButton.setEnabled(true);
@@ -117,12 +120,16 @@ public class MyFrame extends JFrame {
         startButton.addActionListener(e -> {
 
             if (!started) {
-                for (int i = 0; i< hareParameter.getValue(); i++) {
+                for (int i = 0; i < hareParameter.getValue(); i++) {
                     hareList.add(new Hare());
                 }
 
-                for (int i = 0; i< grassParameter.getValue(); i++) {
+                for (int i = 0; i < grassParameter.getValue(); i++) {
                     grassList.add(new Grass());
+                }
+
+                for (int i = 0; i < foxParameter.getValue(); i++) {
+                    foxList.add(new Fox());
                 }
             }
             running = true;

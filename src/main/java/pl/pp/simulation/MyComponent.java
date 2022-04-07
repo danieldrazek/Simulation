@@ -1,5 +1,6 @@
 package pl.pp.simulation;
 
+import pl.pp.simulation.model.Fox;
 import pl.pp.simulation.model.Grass;
 import pl.pp.simulation.model.Hare;
 import pl.pp.simulation.utils.ProgramData;
@@ -7,8 +8,7 @@ import pl.pp.simulation.utils.ProgramData;
 import javax.swing.*;
 import java.awt.*;
 
-import static pl.pp.simulation.utils.ProgramData.grassList;
-import static pl.pp.simulation.utils.ProgramData.hareList;
+import static pl.pp.simulation.utils.ProgramData.*;
 
 public class MyComponent extends JComponent {
 
@@ -36,6 +36,9 @@ public class MyComponent extends JComponent {
             grass.draw(graphics2D);
         }
 
+        for (Fox grass : foxList) {
+            grass.draw(graphics2D);
+        }
 
     }
 }

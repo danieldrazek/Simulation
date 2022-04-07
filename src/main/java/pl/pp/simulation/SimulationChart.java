@@ -12,6 +12,7 @@ public class SimulationChart extends JFrame {
 
     private XYSeries hareSeries;
     private XYSeries grassSeries;
+    private XYSeries foxSeries;
 
     public SimulationChart() {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
@@ -40,9 +41,11 @@ public class SimulationChart extends JFrame {
         XYSeriesCollection dataset = new XYSeriesCollection();
         hareSeries = new XYSeries("zające");
         grassSeries = new XYSeries("trawa");
+        foxSeries = new XYSeries("lisy");
 
         dataset.addSeries(hareSeries);
         dataset.addSeries(grassSeries);
+        dataset.addSeries(foxSeries);
         return dataset;
     }
 
@@ -52,5 +55,9 @@ public class SimulationChart extends JFrame {
 
     public XYSeries getGrassSeries() {
         return grassSeries;
+    }
+
+    public XYSeries getFoxSeries() {
+        return foxSeries;
     }
 }
