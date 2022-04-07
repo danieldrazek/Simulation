@@ -1,14 +1,15 @@
 package pl.pp.simulation.utils;
 
 import pl.pp.simulation.model.Hare;
+import pl.pp.simulation.model.Organism;
 
-import static pl.pp.simulation.utils.Components.*;
+import static pl.pp.simulation.utils.Components.textArea;
 import static pl.pp.simulation.utils.ProgramData.newHareList;
 
 public class Utils {
-    public static double getDistance(Hare hare1, Hare hare2) {
-        double deltaX = hare1.getX() - hare2.getX();
-        double deltaY = hare1.getY() - hare2.getY();
+    public static double getDistance(Organism organism1, Organism organism2) {
+        double deltaX = organism1.getX() - organism2.getX();
+        double deltaY = organism1.getY() - organism2.getY();
 
         return Math.hypot(deltaX, deltaY);
     }

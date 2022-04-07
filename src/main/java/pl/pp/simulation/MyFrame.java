@@ -78,6 +78,11 @@ public class MyFrame extends JFrame {
             running = false;
             started = false;
 
+            textArea.setText("");
+
+            simulationChart.getGrassSeries().clear();
+            simulationChart.getHareSeries().clear();
+
             timer.stop();
 
             grassList.clear();

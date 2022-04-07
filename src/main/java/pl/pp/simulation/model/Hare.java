@@ -11,25 +11,27 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static pl.pp.simulation.utils.ProgramData.hareList;
+import static pl.pp.simulation.utils.Components.textArea;
+import static pl.pp.simulation.utils.ProgramData.*;
 import static pl.pp.simulation.utils.Utils.getDistance;
 import static pl.pp.simulation.utils.Utils.multiple;
 
-public class Hare {
+public class Hare extends Organism{
     public static int size = 10;
     public static int maxSpeed = 10;
     public static int visibility = 40;
     public static int minimumDesireForParenthood = 50;
+    public static int minimumHunger = 50;
+    public static int deathlyHunger = 200;
+    public static int reducingHunger = 100;
     public static int maxX = ProgramData.maxWidth - size;
     public static int maxY = ProgramData.maxHeight - size;
     private static Random random = new Random();
 
-    private double x;
-    private double y;
-
     private double speed;
     private double speedAngle;
     private int desireForParenthood;
+    private int hunger;
 
     public Hare() {
         x = random.nextInt(maxX);
@@ -37,6 +39,7 @@ public class Hare {
         speed = random.nextInt(maxSpeed);
         speedAngle = random.nextInt(360);
         desireForParenthood = minimumDesireForParenthood;
+        hunger = minimumHunger*2;
     }
 
     public Hare(double x, double y) {
@@ -45,6 +48,7 @@ public class Hare {
         speed = 0;
         speedAngle = random.nextInt(360);
         desireForParenthood = 0;
+        hunger = minimumHunger*2;
     }
 
 
@@ -63,6 +67,11 @@ public class Hare {
         validatePosition();
 
         desireForParenthood++;
+        hunger++;
+
+        if (hunger > deathlyHunger) {
+            deathHareList.add(this);
+        }
     }
 
     private void validatePosition() {
@@ -92,14 +101,42 @@ public class Hare {
     }
 
     private void changeSpeed() {
-        if (desireForParenthood >= minimumDesireForParenthood && getVisibleHares().size() > 0) {
-            adjustSpeedToNearesHare();
+        if (hunger >= minimumHunger && getVisibleGrass().size() > 0) {
+            adjustSpeedToNearestGrass();
+        } else if (desireForParenthood >= minimumDesireForParenthood && getVisibleHares().size() > 0 && hunger < minimumHunger*2) {
+            adjustSpeedToNearestHare();
         } else {
             randomChangeSpeed();
         }
     }
 
-    private void adjustSpeedToNearesHare() {
+    private void adjustSpeedToNearestGrass() {
+        Grass nearestGrass = Collections.min(getVisibleGrass(), Comparator.comparingDouble((Grass hare) -> getDistance(this, hare)));
+        double distance = Utils.getDistance(nearestGrass, this);
+
+        if (distance < size) {
+            eatGrass(nearestGrass);
+        }
+
+        speed++;
+        speedAngle = getAngleTo(nearestGrass);
+
+        if (speed > maxSpeed) {
+            speed = maxSpeed;
+        }
+
+        if (speed > distance) {
+            speed = distance;
+        }
+    }
+
+    private void eatGrass(Grass nearestGrass) {
+        grassList.remove(nearestGrass);
+        textArea.append("\n Jedzenie trawy");
+        hunger -= reducingHunger;
+    }
+
+    private void adjustSpeedToNearestHare() {
         Hare nearestHare = Collections.min(getVisibleHares(), Comparator.comparingDouble((Hare hare) -> getDistance(this, hare)));
         double distance = Utils.getDistance(nearestHare, this);
 
@@ -141,9 +178,15 @@ public class Hare {
                 .collect(Collectors.toList());
     }
 
-    public double getAngleTo(Hare hare) {
-        double deltaX = hare.getX() - x;
-        double deltaY = hare.getY() - y;
+    public List<Grass> getVisibleGrass() {
+        return grassList.stream()
+                .filter(grass -> getDistance(this, grass) <= visibility)
+                .collect(Collectors.toList());
+    }
+
+    public double getAngleTo(Organism organism) {
+        double deltaX = organism.getX() - x;
+        double deltaY = organism.getY() - y;
 
         return Math.toDegrees(Math.atan2(deltaY, deltaX));
     }
