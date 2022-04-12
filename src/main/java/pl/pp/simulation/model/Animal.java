@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-import static pl.pp.simulation.utils.ProgramData.*;
 import static pl.pp.simulation.utils.Utils.getDistance;
 
 public abstract class Animal extends Organism {
@@ -19,7 +18,7 @@ public abstract class Animal extends Organism {
     public static int reducingHungerByHare = 300;
     public static int maxX = ProgramData.maxWidth - size;
     public static int maxY = ProgramData.maxHeight - size;
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     protected double speed;
     protected double speedAngle;
@@ -131,18 +130,19 @@ public abstract class Animal extends Organism {
     }
 
     public List<Fox> getVisibleFoxes() {        //lista widocznych zajacow
-        return foxList.stream()
+        return Foxes.foxList.stream()
                 .filter(fox -> fox != this && getDistance(this, fox) <= visibility)
                 .collect(Collectors.toList());
     }
+
     public List<Hare> getVisibleHares() {        //lista widocznych zajacow
-        return hareList.stream()
+        return Hares.hareList.stream()
                 .filter(hare -> hare != this && getDistance(this, hare) <= visibility)
                 .collect(Collectors.toList());
     }
 
     public List<Grass> getVisibleGrass() {        //lista widocznych zajacow
-        return grassList.stream()
+        return GrassUtils.grassList.stream()
                 .filter(grass -> getDistance(this, grass) <= visibility)
                 .collect(Collectors.toList());
     }
@@ -166,4 +166,3 @@ public abstract class Animal extends Organism {
         return speed * Math.sin(Math.toRadians(speedAngle));
     }
 }
-

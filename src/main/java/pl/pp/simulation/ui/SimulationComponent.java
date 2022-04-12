@@ -1,14 +1,10 @@
 package pl.pp.simulation.ui;
 
-import pl.pp.simulation.model.Fox;
-import pl.pp.simulation.model.Grass;
-import pl.pp.simulation.model.Hare;
+import pl.pp.simulation.model.Organisms;
 import pl.pp.simulation.utils.ProgramData;
 
 import javax.swing.*;
 import java.awt.*;
-
-import static pl.pp.simulation.utils.ProgramData.*;
 
 public class SimulationComponent extends JComponent {
 
@@ -32,18 +28,7 @@ public class SimulationComponent extends JComponent {
         graphics2D.setPaint(Color.LIGHT_GRAY);
         graphics2D.fill(limit);
 
-        for (Hare hare : hareList) {    //iterujemy przez liste zajecy
-            hare.draw(graphics2D);
-        }
-
-        for (Grass grass : grassList) {
-            grass.draw(graphics2D);
-        }
-
-        for (Fox fox : foxList) {
-            fox.draw(graphics2D);
-        }
-
+        Organisms.draw(graphics2D);
 
     }
 }

@@ -5,7 +5,7 @@ import pl.pp.simulation.utils.ProgramData;
 import javax.swing.*;
 import java.awt.*;
 
-public class ScrollPanel extends JScrollPane{
+public class ScrollPanel extends JScrollPane {
 
     public static JTextArea textArea;
 

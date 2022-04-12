@@ -14,6 +14,5 @@ public class Run {
 
             timer = new Step();
         });
-
     }
 }

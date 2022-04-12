@@ -4,19 +4,19 @@ import pl.pp.simulation.model.Fox;
 import pl.pp.simulation.model.Hare;
 import pl.pp.simulation.model.Organism;
 
+import static pl.pp.simulation.model.Foxes.newFoxList;
+import static pl.pp.simulation.model.Hares.newHareList;
 import static pl.pp.simulation.ui.panels.ScrollPanel.textArea;
-import static pl.pp.simulation.utils.ProgramData.newFoxList;
-import static pl.pp.simulation.utils.ProgramData.newHareList;
 
 public class Utils {
-    public static double getDistance(Organism organism1, Organism organism2){
+    public static double getDistance(Organism organism1, Organism organism2) {
         double deltaX = organism1.getX() - organism2.getX();
         double deltaY = organism1.getY() - organism2.getY();
 
         return Math.hypot(deltaX, deltaY);
     }
 
-    public static void multipleHare(Hare hare1, Hare hare2){
+    public static void multipleHare(Hare hare1, Hare hare2) {
         hare1.clearDesireForParenthood();
         hare2.clearDesireForParenthood();
 
@@ -25,7 +25,7 @@ public class Utils {
         textArea.append("\n Hares reproduction");
     }
 
-    public static void multipleFoxes(Fox fox1, Fox fox2){
+    public static void multipleFoxes(Fox fox1, Fox fox2) {
         fox1.clearDesireForParenthood();
         fox2.clearDesireForParenthood();
 

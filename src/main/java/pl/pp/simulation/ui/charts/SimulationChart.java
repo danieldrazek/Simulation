@@ -30,13 +30,12 @@ public class SimulationChart extends JFrame {
     }
 
     private JFreeChart getChart(XYSeriesCollection dataSet) {
-        JFreeChart freeChart = ChartFactory.createXYLineChart(
-                "Quantity of organisms depending of time",
+        return ChartFactory.createXYLineChart(
+                "Quantity of organisms depending on time",
                 "time",
                 "quantity",
                 dataSet
         );
-        return freeChart;
     }
 
     private XYSeriesCollection getDataSet() {
@@ -62,5 +61,11 @@ public class SimulationChart extends JFrame {
 
     public XYSeries getFoxSeries() {
         return foxSeries;
+    }
+
+    public void clear() {
+        grassSeries.clear();
+        hareSeries.clear();
+        foxSeries.clear();
     }
 }

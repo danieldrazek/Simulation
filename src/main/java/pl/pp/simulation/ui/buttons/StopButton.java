@@ -7,10 +7,10 @@ import static pl.pp.simulation.utils.ProgramData.timer;
 
 public class StopButton extends JButton {
 
-    private static final StopButton stopButton = new StopButton("Stop");
+    private static final StopButton STOP_BUTTON = new StopButton("Stop");
 
     public static StopButton getInstance() {    //tworzy tylko 1 instancje klasy (wskazuje na ten jedyny stopButton)
-        return stopButton;
+        return STOP_BUTTON;
     }
 
     private StopButton(String text) {
