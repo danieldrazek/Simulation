@@ -15,10 +15,10 @@ public class Grass extends Organism {
         y = random.nextInt(ProgramData.maxHeight - size);
     }
 
-
     public void draw(Graphics2D graphics2D) {
         Ellipse2D.Double hareEllipse = new Ellipse2D.Double(x, y, size, size);
-        graphics2D.setPaint(new Color(49, 189, 31));
+        graphics2D.setPaint(Color.BLUE);
         graphics2D.fill(hareEllipse);
+
     }
 }

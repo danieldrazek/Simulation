@@ -7,19 +7,19 @@ import java.awt.geom.Ellipse2D;
 import java.util.Collections;
 import java.util.Comparator;
 
-import static pl.pp.simulation.utils.Components.textArea;
+import static pl.pp.simulation.ui.panels.ScrollPanel.textArea;
 import static pl.pp.simulation.utils.ProgramData.deathHareList;
 import static pl.pp.simulation.utils.ProgramData.grassList;
-import static pl.pp.simulation.utils.Utils.*;
+import static pl.pp.simulation.utils.Utils.getDistance;
+import static pl.pp.simulation.utils.Utils.multipleHare;
 
 public class Hare extends Animal {
-
 
     public Hare() {
         super();
     }
 
-    public Hare(double x, double y) {
+    public Hare(double x, double y) {           //nowy zajac
         super(x, y);
     }
 
@@ -33,33 +33,32 @@ public class Hare extends Animal {
     public void move() {
         super.move();
 
-        if (hunger > deathlyHunger) {
+        if (hunger > deathlyHunger) {        //umieranie
             deathHareList.add(this);
         }
     }
 
     public void draw(Graphics2D graphics2D) {
-        Ellipse2D.Double hareEllipse = new Ellipse2D.Double(x, y, size, size);
-        graphics2D.setPaint(Color.DARK_GRAY);
+        Ellipse2D.Double hareEllipse = new Ellipse2D.Double(x, y, size, size);      //rysowanie zajecy
+        graphics2D.setPaint(Color.RED);
         graphics2D.fill(hareEllipse);
+
     }
 
-
     public void changeSpeed() {
-        if (getVisibleFoxes().size() > 0){
-            Fox nearestFox = Collections.min(getVisibleFoxes(), Comparator.comparingDouble((Fox f) -> getDistance(this, f)));
-            runAwayFrom(nearestFox);
-        } else if (hunger >= minimumHunger && getVisibleGrass().size() > 0) {
-            Grass nearestGrass = Collections.min(getVisibleGrass(), Comparator.comparingDouble((Grass hare) -> getDistance(this, hare)));
-            adjustSpeedTo(nearestGrass);
-            eatIfContact(nearestGrass);
-        } else if (desireForParenthood >= minimumDesireForParenthood && getVisibleHares().size() > 0 && hunger < minimumHunger * 2) {
+        if (getVisibleFoxes().size() > 0) {  //jezeli jest widoczny lis to zajac straci zycie
+            Fox nearestFox = Collections.min(getVisibleFoxes(), Comparator.comparingDouble((Fox f) -> getDistance(this, f)));   //pobieranie najblizszego lisa
+            runAwayFrom(nearestFox);        //uciekam od najblizszego lisa
+        } else if (hunger >= minHunger && getVisibleGrass().size() > 0) {
+            Grass nearestGrass = Collections.min(getVisibleGrass(), Comparator.comparingDouble((Grass hare) -> getDistance(this, hare)));   //pobieranie trawy
+            adjustSpeedTo(nearestGrass);        //dostosowanie predkosci
+            eatIfContact(nearestGrass);         //zjadanie
+        } else if (desireForParenthood >= minDesireForParenthood && getVisibleHares().size() > 0 && hunger < minHunger * 2) {
             Hare nearestHare = Collections.min(getVisibleHares(), Comparator.comparingDouble((Hare hare) -> getDistance(this, hare)));
             adjustSpeedTo(nearestHare);
             multipleIfContact(nearestHare);
-
         } else {
-            randomChangeSpeed();
+            randomChangeSpeed();        //losowe poruszenie sie
         }
     }
 
@@ -67,12 +66,12 @@ public class Hare extends Animal {
         double distance = Utils.getDistance(nearestHare, this);
 
         if (distance < size) {
-            multipleHares(this, nearestHare);
+            multipleHare(this, nearestHare);
         }
     }
 
     private void eatIfContact(Grass nearestGrass) {
-        double distance = Utils.getDistance(nearestGrass, this);
+        double distance = Utils.getDistance(nearestGrass, this);    //warunkowe zjadanie
 
         if (distance < size) {
             eatGrass(nearestGrass);
@@ -81,7 +80,7 @@ public class Hare extends Animal {
 
     private void eatGrass(Grass nearestGrass) {
         grassList.remove(nearestGrass);
-        textArea.append("\n Jedzenie trawy");
+        textArea.append("\n Eating grass");
         hunger -= reducingHungerByGrass;
     }
 

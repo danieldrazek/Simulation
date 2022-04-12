@@ -13,10 +13,10 @@ public class ParameterModel {
     public ParameterModel(String stringLabel, int defaultValue) {
         this.stringLabel = stringLabel;
         this.defaultValue = defaultValue;
-        initPanel();
+        intPanel();
     }
 
-    private void initPanel() {
+    private void intPanel() {
         panel = new JPanel();
         panel.setLayout(new GridLayout(1, 2, 2, 2));
         label = new JLabel(stringLabel);
@@ -34,7 +34,7 @@ public class ParameterModel {
     }
 
     public void setValue(int value) {
-        label.setText(stringLabel + " " + value);
+        label.setText(stringLabel + ": " + value);
     }
 
     public int getValue() {

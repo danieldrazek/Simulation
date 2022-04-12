@@ -1,4 +1,4 @@
-package pl.pp.simulation;
+package pl.pp.simulation.ui.charts;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -10,16 +10,18 @@ import javax.swing.*;
 
 public class SimulationChart extends JFrame {
 
+    public static SimulationChart simulationChart = new SimulationChart();
+
     private XYSeries hareSeries;
     private XYSeries grassSeries;
     private XYSeries foxSeries;
 
     public SimulationChart() {
         setDefaultCloseOperation(HIDE_ON_CLOSE);
-        setTitle("Wykres");
+        setTitle("Chart");
 
-        XYSeriesCollection dataset = getDataSet();
-        JFreeChart freeChart = getChart(dataset);
+        XYSeriesCollection dataSet = getDataSet();
+        JFreeChart freeChart = getChart(dataSet);
 
         ChartPanel chartPanel = new ChartPanel(freeChart);
 
@@ -27,26 +29,27 @@ public class SimulationChart extends JFrame {
         pack();
     }
 
-    private JFreeChart getChart(XYSeriesCollection dataset) {
+    private JFreeChart getChart(XYSeriesCollection dataSet) {
         JFreeChart freeChart = ChartFactory.createXYLineChart(
-                "Ilość organizmów w zależeności od czasu",
-                "czas",
-                "ilosć",
-                dataset
+                "Quantity of organisms depending of time",
+                "time",
+                "quantity",
+                dataSet
         );
         return freeChart;
     }
 
     private XYSeriesCollection getDataSet() {
-        XYSeriesCollection dataset = new XYSeriesCollection();
-        hareSeries = new XYSeries("zające");
-        grassSeries = new XYSeries("trawa");
-        foxSeries = new XYSeries("lisy");
+        XYSeriesCollection dataSet = new XYSeriesCollection();
 
-        dataset.addSeries(hareSeries);
-        dataset.addSeries(grassSeries);
-        dataset.addSeries(foxSeries);
-        return dataset;
+        hareSeries = new XYSeries("Hares");             //tworze serie zajacow
+        grassSeries = new XYSeries("Grass");             //tworze serie trawy
+        foxSeries = new XYSeries("Foxes");             //tworze serie lisow
+
+        dataSet.addSeries(hareSeries);                      //dodaje serie do kolekcji
+        dataSet.addSeries(grassSeries);
+        dataSet.addSeries(foxSeries);
+        return dataSet;
     }
 
     public XYSeries getHareSeries() {

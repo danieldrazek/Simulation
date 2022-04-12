@@ -24,4 +24,6 @@ public abstract class Organism {
     }
 
     public abstract void draw(Graphics2D graphics2D);
+
+
 }

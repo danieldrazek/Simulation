@@ -3,8 +3,6 @@ package pl.pp.simulation.model;
 import pl.pp.simulation.utils.ProgramData;
 import pl.pp.simulation.utils.Utils;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -12,10 +10,10 @@ import java.util.stream.Collectors;
 import static pl.pp.simulation.utils.ProgramData.*;
 import static pl.pp.simulation.utils.Utils.getDistance;
 
-public abstract class Animal extends Organism{
+public abstract class Animal extends Organism {
     public static int size = 10;
-    public static int minimumDesireForParenthood = 50;
-    public static int minimumHunger = 50;
+    public static int minDesireForParenthood = 50;
+    public static int minHunger = 50;
     public static int deathlyHunger = 200;
     public static int reducingHungerByGrass = 100;
     public static int reducingHungerByHare = 300;
@@ -27,8 +25,8 @@ public abstract class Animal extends Organism{
     protected double speedAngle;
     protected int desireForParenthood;
     protected int hunger;
-    public int maxSpeed;
-    public int visibility;
+    public int maxSpeed = 10;
+    public int visibility = 40;
 
     public Animal() {
         init();
@@ -36,23 +34,23 @@ public abstract class Animal extends Organism{
         y = random.nextInt(maxY);
         speed = random.nextInt(maxSpeed);
         speedAngle = random.nextInt(360);
-        desireForParenthood = minimumDesireForParenthood;
+        desireForParenthood = minDesireForParenthood;
         hunger = 0;
     }
 
-    public Animal(double x, double y) {
+    public Animal(double x, double y) {           //nowy zwierzak
         init();
         this.x = x;
         this.y = y;
         speed = 0;
         speedAngle = random.nextInt(360);
         desireForParenthood = 0;
-        hunger = minimumHunger*2;
+        hunger = minHunger * 2;
     }
 
     public abstract void init();
 
-    public void move() {
+    public void move() {        //porusznie sie zajecy
         changeSpeed();
 
         x += deltaX();
@@ -93,8 +91,8 @@ public abstract class Animal extends Organism{
     }
 
     public void randomChangeSpeed() {
-        int deltaSpeed = random.nextInt(5) - 2;
-        int deltaAngle = random.nextInt(21) - 10;
+        int deltaSpeed = random.nextInt(5) - 2;     //zakres -2 do 2
+        int deltaAngle = random.nextInt(21) - 10;   //zakres -10 do 10
 
         speed += deltaSpeed;
         speedAngle += deltaAngle;
@@ -108,9 +106,8 @@ public abstract class Animal extends Organism{
         }
     }
 
-
     protected void adjustSpeedTo(Organism organism) {
-        double distance = Utils.getDistance(organism, this);
+        double distance = Utils.getDistance(organism, this);        //pobieram dystans
 
         speed++;
         speedAngle = getAngleTo(organism);
@@ -133,20 +130,18 @@ public abstract class Animal extends Organism{
         }
     }
 
-    public List<Fox> getVisibleFoxes() {
+    public List<Fox> getVisibleFoxes() {        //lista widocznych zajacow
         return foxList.stream()
                 .filter(fox -> fox != this && getDistance(this, fox) <= visibility)
                 .collect(Collectors.toList());
     }
-
-
-    public List<Hare> getVisibleHares() {
+    public List<Hare> getVisibleHares() {        //lista widocznych zajacow
         return hareList.stream()
                 .filter(hare -> hare != this && getDistance(this, hare) <= visibility)
                 .collect(Collectors.toList());
     }
 
-    public List<Grass> getVisibleGrass() {
+    public List<Grass> getVisibleGrass() {        //lista widocznych zajacow
         return grassList.stream()
                 .filter(grass -> getDistance(this, grass) <= visibility)
                 .collect(Collectors.toList());
@@ -156,7 +151,7 @@ public abstract class Animal extends Organism{
         double deltaX = organism.getX() - x;
         double deltaY = organism.getY() - y;
 
-        return Math.toDegrees(Math.atan2(deltaY, deltaX));
+        return Math.toDegrees(Math.atan2(deltaY, deltaX));  //radiany zamieniam na stopnie
     }
 
     public void clearDesireForParenthood() {
@@ -164,10 +159,11 @@ public abstract class Animal extends Organism{
     }
 
     private double deltaX() {
-        return speed*Math.cos(Math.toRadians(speedAngle));
+        return speed * Math.cos(Math.toRadians(speedAngle));
     }
 
     private double deltaY() {
-        return speed*Math.sin(Math.toRadians(speedAngle));
+        return speed * Math.sin(Math.toRadians(speedAngle));
     }
 }
+
