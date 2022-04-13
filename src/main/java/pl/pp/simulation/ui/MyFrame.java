@@ -10,7 +10,7 @@ import java.awt.*;
 public class MyFrame extends JFrame {
 
     public MyFrame() {
-        setTitle("Predator - Victim (simulation)");
+        setTitle("Predator - Prey (simulation)");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(ProgramData.frameWidth, ProgramData.frameHeight);
         setResizable(false);
