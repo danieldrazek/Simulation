@@ -38,9 +38,4 @@ public class Hares {
         }
     }
 
-    public static void init() {
-        for (int i = 0; i < ControlPanel.hareParameter.getValue(); i++) {        //generowanie/losowanie zajacow
-            Hares.hareList.add(new Hare());
-        }
-    }
 }

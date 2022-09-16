@@ -17,6 +17,7 @@ public class SimulationChart extends JFrame {
     private XYSeries foxSeries;
 
     public SimulationChart() {
+        System.out.println("Constructor - SimulationChart");
         setDefaultCloseOperation(HIDE_ON_CLOSE);
         setTitle("Chart");
 

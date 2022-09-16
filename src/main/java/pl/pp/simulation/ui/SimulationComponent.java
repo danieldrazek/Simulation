@@ -1,6 +1,8 @@
 package pl.pp.simulation.ui;
 
-import pl.pp.simulation.model.Organisms;
+import pl.pp.simulation.model.Foxes;
+import pl.pp.simulation.model.GrassUtils;
+import pl.pp.simulation.model.Hares;
 import pl.pp.simulation.utils.ProgramData;
 
 import javax.swing.*;
@@ -8,15 +10,8 @@ import java.awt.*;
 
 public class SimulationComponent extends JComponent {
 
-
-    private static final SimulationComponent SIMULATION_COMPONENT = new SimulationComponent();
-
-    public static SimulationComponent getInstance() {
-        return SIMULATION_COMPONENT;
-    }
-
-    private SimulationComponent() {
-
+    public SimulationComponent() {
+        System.out.println("Constructor - SimulationComponent");
     }
 
     @Override
@@ -28,7 +23,13 @@ public class SimulationComponent extends JComponent {
         graphics2D.setPaint(Color.LIGHT_GRAY);
         graphics2D.fill(limit);
 
-        Organisms.draw(graphics2D);
+        draw(graphics2D);
 
+    }
+
+    public void draw(Graphics2D graphics2D) {
+        GrassUtils.draw(graphics2D);
+        Hares.draw(graphics2D);
+        Foxes.draw(graphics2D);
     }
 }

@@ -38,9 +38,4 @@ public class Foxes {
         }
     }
 
-    public static void init() {
-        for (int i = 0; i < ControlPanel.foxParameter.getValue(); i++) {
-            Foxes.foxList.add(new Fox());
-        }
-    }
 }

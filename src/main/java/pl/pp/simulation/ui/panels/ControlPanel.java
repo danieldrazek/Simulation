@@ -18,13 +18,8 @@ public class ControlPanel extends JPanel {
 
     public static JLabel timeLabel;
 
-    private static final ControlPanel controlPanel = new ControlPanel();
-
-    public static ControlPanel getInstance() {
-        return controlPanel;
-    }
-
-    private ControlPanel() {
+    public ControlPanel() {
+        System.out.println("Constructor - ControlPanel");
         setLayout(new GridLayout(8, 1, 50, 50));
 
         setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));

@@ -9,13 +9,8 @@ public class ScrollPanel extends JScrollPane {
 
     public static JTextArea textArea;
 
-    private static final ScrollPanel scrollPanel = new ScrollPanel();
-
-    public static ScrollPanel getInstance() {
-        return scrollPanel;
-    }
-
-    private ScrollPanel() {
+    public ScrollPanel() {
+        System.out.println("Constructor - ScrollPanel");
         textArea = new JTextArea();
         textArea.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(textArea);

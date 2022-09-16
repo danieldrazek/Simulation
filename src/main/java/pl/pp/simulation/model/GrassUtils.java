@@ -32,10 +32,4 @@ public class GrassUtils {
         }
     }
 
-    public static void init() {
-        for (int i = 0; i < ControlPanel.grassParameter.getValue(); i++) {
-            grassList.add(new Grass());
-        }
-
-    }
 }
