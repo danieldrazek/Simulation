@@ -1,5 +1,6 @@
 package pl.pp.simulation.ui.buttons;
 
+import pl.pp.simulation.Step;
 import pl.pp.simulation.model.*;
 import pl.pp.simulation.ui.panels.ControlPanel;
 import pl.pp.simulation.utils.ParameterModel;
@@ -14,14 +15,9 @@ public class StartButton extends JButton {
     public ParameterModel foxParameter = ControlPanel.foxParameter;
 
 
-    private static final StartButton START_BUTTON = new StartButton("Start");
-
-    public static StartButton getInstance() {
-        return START_BUTTON;
-    }
-
-    private StartButton(String text) {      //prywatny konstruktor
+    public StartButton(StopButton stopButton, Step timer, String text) {      //prywatny konstruktor
         super(text);
+        System.out.println("Constructor - StartButton");
 //        inicjalizacja StartButton
         addActionListener(e -> {
 
@@ -31,7 +27,7 @@ public class StartButton extends JButton {
             running = true;
             started = true;
 
-            StopButton.getInstance().setEnabled(true);
+            stopButton.setEnabled(true);
             setEnabled(false);
 
             ControlPanel.setNotEditableParameters();
