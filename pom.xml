@@ -13,6 +13,7 @@
         <maven.compiler.target>16</maven.compiler.target>
         <jfreechart.version>1.5.3</jfreechart.version>
         <spring-context.version>5.3.22</spring-context.version>
+        <javax.annotation-api.version>1.3.2</javax.annotation-api.version>
     </properties>
 
     <dependencies>
@@ -25,6 +26,11 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>${spring-context.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>${javax.annotation-api.version}</version>
         </dependency>
     </dependencies>
 
