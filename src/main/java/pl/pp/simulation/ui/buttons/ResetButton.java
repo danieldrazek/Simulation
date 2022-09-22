@@ -4,12 +4,12 @@ import pl.pp.simulation.Step;
 import pl.pp.simulation.model.FoxesService;
 import pl.pp.simulation.model.GrassService;
 import pl.pp.simulation.model.HaresService;
-import pl.pp.simulation.ui.panels.ControlPanel;
+import pl.pp.simulation.ui.charts.SimulationChart;
+import pl.pp.simulation.utils.ParameterModel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 
-import static pl.pp.simulation.ui.charts.SimulationChart.simulationChart;
 import static pl.pp.simulation.ui.panels.ScrollPanel.textArea;
 import static pl.pp.simulation.utils.ProgramData.*;
 
@@ -18,9 +18,18 @@ public class ResetButton extends JButton {
     private StartButton startButton;
     private StopButton stopButton;
     private Step timer;
+
+    private ParameterModel grassParameter;
+    private ParameterModel hareParameter;
+    private ParameterModel foxParameter;
+
+
     private GrassService grassService;
     private HaresService haresService;
     private FoxesService foxesService;
+
+    private SimulationChart simulationChart;
+    private JLabel timeLabel;
 
 
     public ResetButton(String text) {
@@ -29,7 +38,7 @@ public class ResetButton extends JButton {
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         addActionListener(e -> {
             running = false;
             started = false;
@@ -45,10 +54,10 @@ public class ResetButton extends JButton {
             stopButton.setEnabled(true);
             startButton.setEnabled(false);
 
-            ControlPanel.setEditableParameters();
+            setEditableParameters();
 
             steps = 0;
-            ControlPanel.timeLabel.setText("Time: 0");
+            timeLabel.setText("Time: 0");
         });
     }
 
@@ -56,6 +65,12 @@ public class ResetButton extends JButton {
         haresService.getHareList().clear();
         grassService.getGrassList().clear();
         foxesService.getFoxList().clear();
+    }
+
+    public void setEditableParameters() {
+        grassParameter.setEditable(true);
+        hareParameter.setEditable(true);
+        foxParameter.setEditable(true);
     }
 
     public void setStartButton(StartButton startButton) {
@@ -80,5 +95,25 @@ public class ResetButton extends JButton {
 
     public void setFoxesService(FoxesService foxesService) {
         this.foxesService = foxesService;
+    }
+
+    public void setSimulationChart(SimulationChart simulationChart) {
+        this.simulationChart = simulationChart;
+    }
+
+    public void setTimeLabel(JLabel timeLabel) {
+        this.timeLabel = timeLabel;
+    }
+
+    public void setGrassParameter(ParameterModel grassParameter) {
+        this.grassParameter = grassParameter;
+    }
+
+    public void setHareParameter(ParameterModel hareParameter) {
+        this.hareParameter = hareParameter;
+    }
+
+    public void setFoxParameter(ParameterModel foxParameter) {
+        this.foxParameter = foxParameter;
     }
 }

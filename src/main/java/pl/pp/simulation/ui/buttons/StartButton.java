@@ -2,18 +2,18 @@ package pl.pp.simulation.ui.buttons;
 
 import pl.pp.simulation.Step;
 import pl.pp.simulation.model.*;
-import pl.pp.simulation.ui.panels.ControlPanel;
 import pl.pp.simulation.utils.ParameterModel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;
 
-import static pl.pp.simulation.utils.ProgramData.*;
+import static pl.pp.simulation.utils.ProgramData.running;
+import static pl.pp.simulation.utils.ProgramData.started;
 
 public class StartButton extends JButton {
-    public ParameterModel grassParameter = ControlPanel.grassParameter;
-    public ParameterModel hareParameter  = ControlPanel.hareParameter;
-    public ParameterModel foxParameter = ControlPanel.foxParameter;
+    public ParameterModel grassParameter;
+    public ParameterModel hareParameter;
+    public ParameterModel foxParameter;
 
     private Step timer;
     private StopButton stopButton;
@@ -29,7 +29,7 @@ public class StartButton extends JButton {
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         //        inicjalizacja StartButton
         stopButton.setStartButton(this);
         addActionListener(e -> {
@@ -43,20 +43,26 @@ public class StartButton extends JButton {
             stopButton.setEnabled(true);
             setEnabled(false);
 
-            ControlPanel.setNotEditableParameters();
+            setNotEditableParameters();
 
             timer.start();
         });
     }
 
+    public void setNotEditableParameters() {
+        grassParameter.setEditable(false);
+        hareParameter.setEditable(false);
+        foxParameter.setEditable(false);
+    }
+
     public void createObject() {
-        for (int i = 0; i < ControlPanel.hareParameter.getValue(); i++) {        //generowanie/losowanie zajacow
+        for (int i = 0; i < hareParameter.getValue(); i++) {        //generowanie/losowanie zajacow
             haresService.getHareList().add(new Hare());
         }
-        for (int i = 0; i < ControlPanel.grassParameter.getValue(); i++) {
+        for (int i = 0; i < grassParameter.getValue(); i++) {
             grassService.getGrassList().add(new Grass());
         }
-        for (int i = 0; i < ControlPanel.foxParameter.getValue(); i++) {
+        for (int i = 0; i < foxParameter.getValue(); i++) {
             foxesService.getFoxList().add(new Fox());
         }
     }
@@ -79,6 +85,18 @@ public class StartButton extends JButton {
 
     public void setFoxesService(FoxesService foxesService) {
         this.foxesService = foxesService;
+    }
+
+    public void setGrassParameter(ParameterModel grassParameter) {
+        this.grassParameter = grassParameter;
+    }
+
+    public void setHareParameter(ParameterModel hareParameter) {
+        this.hareParameter = hareParameter;
+    }
+
+    public void setFoxParameter(ParameterModel foxParameter) {
+        this.foxParameter = foxParameter;
     }
 }
 

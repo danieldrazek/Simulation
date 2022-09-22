@@ -10,8 +10,6 @@ import javax.swing.*;
 
 public class SimulationChart extends JFrame {
 
-    public static SimulationChart simulationChart = new SimulationChart();
-
     private XYSeries hareSeries;
     private XYSeries grassSeries;
     private XYSeries foxSeries;

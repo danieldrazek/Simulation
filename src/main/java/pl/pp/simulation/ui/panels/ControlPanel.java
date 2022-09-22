@@ -3,6 +3,7 @@ package pl.pp.simulation.ui.panels;
 import pl.pp.simulation.ui.buttons.ResetButton;
 import pl.pp.simulation.ui.buttons.StartButton;
 import pl.pp.simulation.ui.buttons.StopButton;
+import pl.pp.simulation.ui.charts.SimulationChart;
 import pl.pp.simulation.utils.ParameterModel;
 import pl.pp.simulation.utils.ProgramData;
 
@@ -10,30 +11,30 @@ import javax.annotation.PostConstruct;
 import javax.swing.*;
 import java.awt.*;
 
-import static pl.pp.simulation.ui.charts.SimulationChart.simulationChart;
-
 public class ControlPanel extends JPanel {
-    public static ParameterModel grassParameter = new ParameterModel("Grass", 50);
-    public static ParameterModel hareParameter = new ParameterModel("Hares", 20);
-    public static ParameterModel foxParameter = new ParameterModel("Foxes", 12);
+    private ParameterModel grassParameter;
+    private ParameterModel hareParameter;
+    private ParameterModel foxParameter;
 
-    public static JLabel timeLabel;
+    private JLabel timeLabel;
 
     private ResetButton resetButton;
     private StartButton startButton;
     private StopButton stopButton;
+
+    private SimulationChart simulationChart;
 
     public ControlPanel() {
         System.out.println("Constructor - ControlPanel");
     }
 
     @PostConstruct
-    private void init(){
+    private void init() {
         setLayout(new GridLayout(8, 1, 50, 50));
 
         setPreferredSize(new Dimension(ProgramData.frameWidth - ProgramData.maxWidth - 50, ProgramData.frameHeight));
 
-        timeLabel = new JLabel("Time: 0");
+//        timeLabel = new JLabel("Time: 0");
 
         JButton chartButton = new JButton("Chart");
 
@@ -49,18 +50,6 @@ public class ControlPanel extends JPanel {
         add(chartButton);
     }
 
-    public static void setEditableParameters() {
-        grassParameter.setEditable(true);
-        hareParameter.setEditable(true);
-        foxParameter.setEditable(true);
-    }
-
-    public static void setNotEditableParameters() {
-        grassParameter.setEditable(false);
-        hareParameter.setEditable(false);
-        foxParameter.setEditable(false);
-    }
-
     public void setResetButton(ResetButton resetButton) {
         this.resetButton = resetButton;
     }
@@ -71,5 +60,25 @@ public class ControlPanel extends JPanel {
 
     public void setStopButton(StopButton stopButton) {
         this.stopButton = stopButton;
+    }
+
+    public void setSimulationChart(SimulationChart simulationChart) {
+        this.simulationChart = simulationChart;
+    }
+
+    public void setTimeLabel(JLabel timeLabel) {
+        this.timeLabel = timeLabel;
+    }
+
+    public void setGrassParameter(ParameterModel grassParameter) {
+        this.grassParameter = grassParameter;
+    }
+
+    public void setHareParameter(ParameterModel hareParameter) {
+        this.hareParameter = hareParameter;
+    }
+
+    public void setFoxParameter(ParameterModel foxParameter) {
+        this.foxParameter = foxParameter;
     }
 }

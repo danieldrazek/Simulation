@@ -1,7 +1,7 @@
 package pl.pp.simulation.model;
 
 import pl.pp.simulation.ui.charts.SimulationChart;
-import pl.pp.simulation.ui.panels.ControlPanel;
+import pl.pp.simulation.utils.ParameterModel;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -14,6 +14,9 @@ public class HaresService {
     private final List<Hare> hareList = new LinkedList<>();
     private final List<Hare> newHareList = new LinkedList<>();
     private final List<Hare> deathHareList = new LinkedList<>();
+
+    private SimulationChart simulationChart;
+    private ParameterModel hareParameter;
 
     public void move() {
         getNewHareList().clear();
@@ -28,8 +31,8 @@ public class HaresService {
 
     public void updateAmount() {
         int hareAmount = getHareList().size();
-        ControlPanel.hareParameter.setValue(hareAmount);
-        SimulationChart.simulationChart.getHareSeries().add(steps, hareAmount);
+        hareParameter.setValue(hareAmount);
+        simulationChart.getHareSeries().add(steps, hareAmount);
     }
 
     public void draw(Graphics2D graphics2D) {
@@ -50,4 +53,11 @@ public class HaresService {
         return deathHareList;
     }
 
+    public void setSimulationChart(SimulationChart simulationChart) {
+        this.simulationChart = simulationChart;
+    }
+
+    public void setHareParameter(ParameterModel hareParameter) {
+        this.hareParameter = hareParameter;
+    }
 }

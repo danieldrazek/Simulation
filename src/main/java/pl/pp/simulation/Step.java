@@ -19,6 +19,7 @@ public class Step {
     private HaresService haresService;
 
     private SimulationComponent simulationComponent;
+    private JLabel timeLabel;
 
     public Step() {
         System.out.println("Constructor - Step");
@@ -28,7 +29,7 @@ public class Step {
     private void init() {
         timer = new Timer(40, e -> {
             steps++;
-            ControlPanel.timeLabel.setText("Time: " + steps);
+            timeLabel.setText("Time: " + steps);
 
             grassService.grow();
 
@@ -69,5 +70,9 @@ public class Step {
 
     public void setHaresService(HaresService haresService) {
         this.haresService = haresService;
+    }
+
+    public void setTimeLabel(JLabel timeLabel) {
+        this.timeLabel = timeLabel;
     }
 }

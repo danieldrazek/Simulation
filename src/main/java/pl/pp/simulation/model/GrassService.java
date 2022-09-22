@@ -1,7 +1,7 @@
 package pl.pp.simulation.model;
 
 import pl.pp.simulation.ui.charts.SimulationChart;
-import pl.pp.simulation.ui.panels.ControlPanel;
+import pl.pp.simulation.utils.ParameterModel;
 
 import java.awt.*;
 import java.util.LinkedList;
@@ -13,6 +13,8 @@ public class GrassService {
 
     private final List<Grass> grassList = new LinkedList<>();
     private final int frequency = 2;
+    private SimulationChart simulationChart;
+    private ParameterModel grassParameter;
 
     public List<Grass> getGrassList() {
         return grassList;
@@ -20,8 +22,8 @@ public class GrassService {
 
     public void updateAmount() {
         int grassAmount = getGrassList().size();
-        ControlPanel.grassParameter.setValue(grassAmount);
-        SimulationChart.simulationChart.getGrassSeries().add(steps, grassAmount);
+        grassParameter.setValue(grassAmount);
+        simulationChart.getGrassSeries().add(steps, grassAmount);
     }
 
     public void draw(Graphics2D graphics2D) {
@@ -36,4 +38,11 @@ public class GrassService {
         }
     }
 
+    public void setSimulationChart(SimulationChart simulationChart) {
+        this.simulationChart = simulationChart;
+    }
+
+    public void setGrassParameter(ParameterModel grassParameter) {
+        this.grassParameter = grassParameter;
+    }
 }
