@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+import static pl.pp.simulation.utils.ProgramData.context;
 import static pl.pp.simulation.utils.Utils.getDistance;
 
 public abstract class Animal extends Organism {
@@ -27,6 +28,10 @@ public abstract class Animal extends Organism {
     public int maxSpeed = 10;
     public int visibility = 40;
 
+    protected GrassService grassService;
+    protected HaresService haresService;
+    protected FoxesService foxesService;
+
     public Animal() {
         init();
         x = random.nextInt(maxX);
@@ -35,6 +40,10 @@ public abstract class Animal extends Organism {
         speedAngle = random.nextInt(360);
         desireForParenthood = minDesireForParenthood;
         hunger = 0;
+
+        grassService = context.getBean("grassService", GrassService.class);
+        haresService = context.getBean("haresService", HaresService.class);
+        foxesService = context.getBean("foxesService", FoxesService.class);
     }
 
     public Animal(double x, double y) {           //nowy zwierzak
@@ -45,6 +54,10 @@ public abstract class Animal extends Organism {
         speedAngle = random.nextInt(360);
         desireForParenthood = 0;
         hunger = minHunger * 2;
+
+        grassService = context.getBean("grassService", GrassService.class);
+        haresService = context.getBean("haresService", HaresService.class);
+        foxesService = context.getBean("foxesService", FoxesService.class);
     }
 
     public abstract void init();
@@ -130,19 +143,19 @@ public abstract class Animal extends Organism {
     }
 
     public List<Fox> getVisibleFoxes() {        //lista widocznych zajacow
-        return Foxes.foxList.stream()
+        return foxesService.getFoxList().stream()
                 .filter(fox -> fox != this && getDistance(this, fox) <= visibility)
                 .collect(Collectors.toList());
     }
 
     public List<Hare> getVisibleHares() {        //lista widocznych zajacow
-        return Hares.hareList.stream()
+        return haresService.getHareList().stream()
                 .filter(hare -> hare != this && getDistance(this, hare) <= visibility)
                 .collect(Collectors.toList());
     }
 
     public List<Grass> getVisibleGrass() {        //lista widocznych zajacow
-        return GrassUtils.grassList.stream()
+        return grassService.getGrassList().stream()
                 .filter(grass -> getDistance(this, grass) <= visibility)
                 .collect(Collectors.toList());
     }

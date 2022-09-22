@@ -1,12 +1,9 @@
 package pl.pp.simulation.utils;
 
-import pl.pp.simulation.model.Fox;
-import pl.pp.simulation.model.Hare;
-import pl.pp.simulation.model.Organism;
+import pl.pp.simulation.model.*;
 
-import static pl.pp.simulation.model.Foxes.newFoxList;
-import static pl.pp.simulation.model.Hares.newHareList;
 import static pl.pp.simulation.ui.panels.ScrollPanel.textArea;
+import static pl.pp.simulation.utils.ProgramData.context;
 
 public class Utils {
     public static double getDistance(Organism organism1, Organism organism2) {
@@ -19,8 +16,9 @@ public class Utils {
     public static void multipleHare(Hare hare1, Hare hare2) {
         hare1.clearDesireForParenthood();
         hare2.clearDesireForParenthood();
+        HaresService haresService = context.getBean("haresService", HaresService.class);
 
-        newHareList.add(new Hare(hare1.getX(), hare2.getY())); //tworzenie nowego zajaca i przypisanie wspolrzednych jednego rodzica
+        haresService.getNewHareList().add(new Hare(hare1.getX(), hare2.getY())); //tworzenie nowego zajaca i przypisanie wspolrzednych jednego rodzica
 
         textArea.append("\n Hares reproduction");
     }
@@ -29,7 +27,9 @@ public class Utils {
         fox1.clearDesireForParenthood();
         fox2.clearDesireForParenthood();
 
-        newFoxList.add(new Fox(fox1.getX(), fox2.getY())); //tworzenie nowego zajaca i przypisanie wspolrzednych jednego rodzica
+        FoxesService foxesService = context.getBean("foxesService", FoxesService.class);
+
+        foxesService.getNewFoxList().add(new Fox(fox1.getX(), fox2.getY())); //tworzenie nowego zajaca i przypisanie wspolrzednych jednego rodzica
 
         textArea.append("\n Hares reproduction");
     }
