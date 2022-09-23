@@ -18,6 +18,7 @@ from the foxes, and if they are hungry, they eat the grass. Foxes are chasing ha
 - Java
 - Swing
 - Maven
+- Spring - version 5.3.22
 - JFreeChart - version 1.5.3
 
 ## Features

@@ -2,10 +2,7 @@ package pl.pp.simulation.utils;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pl.pp.simulation.Step;
 import pl.pp.simulation.config.SimulationConfig;
-
-import javax.swing.*;
 
 public class ProgramData {
     public static int frameWidth = 1000;

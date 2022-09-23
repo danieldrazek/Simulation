@@ -1,8 +1,5 @@
 package pl.pp.simulation.ui;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pl.pp.simulation.config.SimulationConfig;
 import pl.pp.simulation.ui.panels.ControlPanel;
 import pl.pp.simulation.ui.panels.ScrollPanel;
 import pl.pp.simulation.utils.ProgramData;

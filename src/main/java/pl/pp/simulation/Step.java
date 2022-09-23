@@ -4,7 +4,6 @@ import pl.pp.simulation.model.FoxesService;
 import pl.pp.simulation.model.GrassService;
 import pl.pp.simulation.model.HaresService;
 import pl.pp.simulation.ui.SimulationComponent;
-import pl.pp.simulation.ui.panels.ControlPanel;
 
 import javax.annotation.PostConstruct;
 import javax.swing.*;

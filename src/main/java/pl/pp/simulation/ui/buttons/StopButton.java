@@ -2,10 +2,10 @@ package pl.pp.simulation.ui.buttons;
 
 import pl.pp.simulation.Step;
 
+import javax.annotation.PostConstruct;
 import javax.swing.*;
-import javax.annotation.*;
 
-import static pl.pp.simulation.utils.ProgramData.*;
+import static pl.pp.simulation.utils.ProgramData.running;
 
 public class StopButton extends JButton {
 
